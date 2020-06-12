@@ -1,0 +1,23 @@
+{
+    "name": "umonkey/php-dbal",
+    "description": "Simple database abstraction layer",
+    "version": "1.0.0",
+    "type": "library",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "homepage": "https://github.com/umonkey/php-dbal/",
+    "require": {
+        "php": ">=7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Umonkey\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Justin Forest",
+            "email": "hex@umonkey.net"
+        }
+    ]
+}
