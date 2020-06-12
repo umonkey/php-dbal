@@ -81,12 +81,12 @@ class Database
                 throw new \RuntimeException("database not configured");
             }
 
-            $this->conn = new PDO($this->dsn["name"], $this->dsn["user"] ?? null, $this->dsn["password"] ?? null);
+            $this->conn = new PDO($this->dsn["dsn"], $this->dsn["user"] ?? null, $this->dsn["password"] ?? null);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
             $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-            if (0 === strpos($this->dsn['name'], 'mysql:')) {
+            if (0 === strpos($this->dsn['dsn'], 'mysql:')) {
                 $this->conn->query('SET NAMES utf8');
             }
 
@@ -212,8 +212,8 @@ class Database
             }
 
             if ($_m = "SQLSTATE[HY000]: General error: 8 attempt to write a readonly database") {
-                if (0 === strpos($this->dsn["name"], "sqlite:")) {
-                    $fn = substr($this->dsn["name"], 7);
+                if (0 === strpos($this->dsn["dsn"], "sqlite:")) {
+                    $fn = substr($this->dsn["dsn"], 7);
                     if (!is_writable($fn)) {
                         throw new \RuntimeException("SQLite database is not writable.");
                     } elseif (!is_writable(dirname($fn))) {
