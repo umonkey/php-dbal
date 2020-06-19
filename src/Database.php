@@ -191,8 +191,8 @@ class Database
         $db = $this->connect();
         $sth = $db->prepare($query);
         $sth->execute($params);
-
-        return $sth->fetchColumn(0);
+        $res = $sth->fetchColumn(0);
+        return $res === false ? null : $res;
     }
 
     public function query(string $query, array $params = []): PDOStatement
